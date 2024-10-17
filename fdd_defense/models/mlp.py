@@ -64,6 +64,7 @@ class MLP(nn.Module):
 
     # Метод для загрузки весов модели
     def load(self, path):
-        self.model.load_state_dict(torch.load(path))
+        self.model.load_state_dict(torch.load(path), strict=False)
         self.model.to(self.device)
         print(f"Модель загружена из {path}")
+
