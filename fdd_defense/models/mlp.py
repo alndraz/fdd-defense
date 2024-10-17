@@ -18,18 +18,19 @@ class MLP(BaseTorchModel):
             window_size, step_size, batch_size, lr, num_epochs, is_test, device,
         )
         self.hidden_dim = hidden_dim
+        self.device = device
 
         # Инициализация архитектуры модели в конструкторе
-        num_sensors = 52  # Количество сенсоров, может быть изменено
-        num_states = 21  # Количество состояний, можно изменить в зависимости от задачи
+        num_sensors = 52  # Количество сенсоров (можно изменить на основе данных)
+        num_states = 2  # Количество классов (также может зависеть от задачи)
 
-        # Определение архитектуры модели
+        # Определение модели
         self.model = nn.Sequential(
             nn.Flatten(),
             nn.Linear(num_sensors * self.window_size, self.hidden_dim),
             nn.ReLU(),
             nn.Linear(self.hidden_dim, num_states),
-        )
+        ).to(self.device)  # Перенос модели на устройство (GPU или CPU)
 
     def fit(self, dataset):
         super().fit(dataset)
