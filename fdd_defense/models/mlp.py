@@ -5,7 +5,7 @@ from fdd_defense.models.base import BaseTorchModel
 class MLP(BaseTorchModel):
     def __init__(
             self,
-            window_size: int,
+            window_size: int,   # Параметр window_size
             step_size: int,
             batch_size=128,
             lr=0.001,
@@ -19,15 +19,16 @@ class MLP(BaseTorchModel):
         )
         self.hidden_dim = hidden_dim
         self.device = device
+        self.window_size = window_size  # Не забывайте сохранять этот параметр
 
         # Инициализация архитектуры модели в конструкторе
         num_sensors = 52  # Количество сенсоров (можно изменить на основе данных)
-        num_states = 2  # Количество классов (также может зависеть от задачи)
+        num_states = 21  # Количество классов (также может зависеть от задачи)
 
         # Определение модели
         self.model = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(num_sensors * self.window_size, self.hidden_dim),
+            nn.Linear(num_sensors * self.window_size, self.hidden_dim),  # Использование window_size
             nn.ReLU(),
             nn.Linear(self.hidden_dim, num_states),
         ).to(self.device)  # Перенос модели на устройство (GPU или CPU)
