@@ -20,9 +20,10 @@ class MLP(BaseTorchModel):
         self.hidden_dim = hidden_dim
 
         # Инициализация архитектуры модели в конструкторе
-        num_sensors = 52
-        num_states = 21
+        num_sensors = 52  # Количество сенсоров, может быть изменено
+        num_states = 2  # Количество состояний, можно изменить в зависимости от задачи
 
+        # Определение архитектуры модели
         self.model = nn.Sequential(
             nn.Flatten(),
             nn.Linear(num_sensors * self.window_size, self.hidden_dim),
