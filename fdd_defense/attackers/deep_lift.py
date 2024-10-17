@@ -51,7 +51,7 @@ class DeepLIFTAttack(BaseAttacker):
                 # Проверяем, превышает ли важность порог для данного признака на текущем временном шаге
                 if abs(self.attributions_time[index][t]) > self.interpretation_threshold:
                     # Генерируем шум для атаки
-                    noise = self.eps * np.random.uniform(-1, 1)
+                    noise = self.eps * np.random.choice([1, -1], size=ts.shape)
                     # Добавляем шум к текущему значению признака на данном временном шаге
                     perturbed_ts[:, t, index] += noise
 
