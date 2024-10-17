@@ -10,11 +10,11 @@ def weight_reset(model):
     if callable(reset_parameters):
         model.reset_parameters()
 
-def accuracy(attacker, defender, step_size):
+def accuracy(attacker, defender, step_size, dataset):
     test_loader = FDDDataloader(
-        dataframe=attacker.model.dataset.df,
-        mask=attacker.model.dataset.test_mask,
-        label=attacker.model.dataset.label,
+        dataframe=dataset.df,
+        mask=dataset.test_mask,
+        label=dataset.labels,
         window_size=attacker.model.window_size,
         step_size=step_size,
         use_minibatches=True,
