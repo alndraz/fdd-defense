@@ -1,7 +1,7 @@
 from fdd_defense.attackers.base import BaseAttacker
 import numpy as np
 
-class NoiseAttacker(BaseAttacker):
+class DeepLIFTAttack(BaseAttacker):
     def __init__(self, model, eps, selected_indices):
         """
         Инициализация атакера, добавляющего шум к выбранным признакам на всех временных шагах.
